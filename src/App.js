@@ -9,11 +9,15 @@ class App extends Component {
     return (
       <Container component="article" maxWidth="sm">
         <h1>Formulario de Cadastro</h1>
-        <FormularioCadastro />
+        <FormularioCadastro getDadosForm={getDadosForm} />
       </Container>
     );
   }
 
 }
+function getDadosForm(dados) {
+console.log(dados);
+}
+
 
 export default App;

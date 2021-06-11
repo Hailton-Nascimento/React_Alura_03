@@ -3,56 +3,53 @@ import React, { useState } from 'react';
 
 
 
-function FormularioCadastro() {
-    const [nome, setNome] = useState("Hailton");
-    const [sobrenome, setSobrenome]= useState("Nascimento");
-
+function FormularioCadastro({getDadosForm}) {
+    const [nome, setNome] = useState("");
+    const [sobrenome, setSobrenome] = useState("");
+    const [cpf, setCpf] = useState("");
+    const [promocoes, setPromocoes] = useState(true);
+    const [novidades, setNovidades] = useState(true);
 
 
     return (
         <form
             onSubmit={(event) => {
                 event.preventDefault();
-                console.log(`${nome} ${sobrenome}` );
+                getDadosForm({nome, sobrenome, cpf,novidades,promocoes });
             }}
         >
 
             <TextField
-            value={nome}
-                onChange={(event) => {      
-                    let temp = event.target.value;                           
-                    if (temp.length > 3) {
-                        temp = temp.substr(0, 3);
-                        
-                    }
-                    setNome(temp);
+                value={nome}
+                onChange={(event) => {
+                    setNome(event.target.value);
                 }}
                 id="nome"
                 fullWidth
                 label="Nome"
+                placeholder="Ex. Hailton"
                 required
-                autoCapitalize="true"
                 margin="normal"
                 variant="outlined"
             />
             <TextField
-            value={sobrenome}
-             onChange={(event) => {
-                setSobrenome(event.target.value);
-                console.log(nome);
-                if (nome.length > 3) {
-                    setSobrenome(sobrenome.substr(0, 3));
-                }
-            }}
+                value={sobrenome}
+                onChange={(event) => {
+                    setSobrenome(event.target.value);
+                }}
                 id="sobrenome"
                 fullWidth
                 label="Sobrenome"
-                autoCapitalize="true"
+                placeholder="Ex. Nascimento"
                 required
                 variant="outlined"
                 margin="normal"
             />
             <TextField
+                value={cpf}
+                onChange={(event) => {
+                    setCpf(event.target.value);
+                }}
                 id="cpf"
                 fullWidth
                 label="CPF"
@@ -64,7 +61,10 @@ function FormularioCadastro() {
             <FormControlLabel
                 control={
                     <Switch
-                        defaultChecked
+                        checked={promocoes}
+                        onChange={(event) => {
+                            setPromocoes(event.target.checked);
+                        }}
                         name="promocoes"
                         color="primary"
                     />
@@ -74,7 +74,10 @@ function FormularioCadastro() {
             <FormControlLabel
                 control={
                     <Switch
-                        defaultChecked
+                        checked={novidades}
+                        onChange={(event) => {
+                            setNovidades(event.target.checked);
+                        }}
                         name="novidades"
                         color="primary"
                     />
@@ -83,7 +86,7 @@ function FormularioCadastro() {
             />
 
 
-            <Button variant="contained" color="primary">
+            <Button type="submit" variant="contained" color="primary">
                 Cadastrar
             </Button>
 
