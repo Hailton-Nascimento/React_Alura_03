@@ -3,19 +3,21 @@ import React, { useState } from 'react';
 
 
 
-function FormularioCadastro({getDadosForm}) {
+function FormularioCadastro({ getDadosForm }) {
     const [nome, setNome] = useState("");
     const [sobrenome, setSobrenome] = useState("");
     const [cpf, setCpf] = useState("");
     const [promocoes, setPromocoes] = useState(true);
     const [novidades, setNovidades] = useState(true);
+  
 
 
     return (
         <form
             onSubmit={(event) => {
                 event.preventDefault();
-                getDadosForm({nome, sobrenome, cpf,novidades,promocoes });
+
+                getDadosForm({ nome, sobrenome, cpf, novidades, promocoes });
             }}
         >
 
@@ -23,6 +25,7 @@ function FormularioCadastro({getDadosForm}) {
                 value={nome}
                 onChange={(event) => {
                     setNome(event.target.value);
+    
                 }}
                 id="nome"
                 fullWidth
@@ -49,8 +52,12 @@ function FormularioCadastro({getDadosForm}) {
                 value={cpf}
                 onChange={(event) => {
                     setCpf(event.target.value);
+                    console.log(event.target.validity);
+                    
                 }}
                 id="cpf"
+                type="number"
+                pattern="([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})"
                 fullWidth
                 label="CPF"
                 required
