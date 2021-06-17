@@ -61,6 +61,7 @@ https://cursos.alura.com.br/course/react-function-components
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App]
+npx create-react-app my-app
 
 ## Available Scripts
 
